@@ -1,15 +1,12 @@
--- ============================================
+
 -- Inventory & Sales Management Mini-System
--- ============================================
 
 CREATE DATABASE InventorySalesDemo;
 GO
 USE InventorySalesDemo;
 GO
 
--- ============================================
--- TABLES
--- ============================================
+
 
 CREATE TABLE Products (
     ProductID INT IDENTITY(1,1) PRIMARY KEY,
@@ -50,10 +47,8 @@ CREATE TABLE OrderItems (
 );
 GO
 
--- ============================================
--- STORED PROCEDURE 1: Create Order
--- Inserts order + items, deducts stock, updates order total
--- ============================================
+    
+-- STORED PROCEDURE 
 
 CREATE PROCEDURE sp_CreateOrder
     @CustomerID INT,
@@ -106,10 +101,7 @@ BEGIN
 END
 GO
 
--- ============================================
--- STORED PROCEDURE 2: Get Low Stock Items
--- Used for the Crystal Reports / SSRS "Low Stock" report
--- ============================================
+
 
 CREATE PROCEDURE sp_GetLowStockItems
 AS
@@ -128,10 +120,7 @@ BEGIN
 END
 GO
 
--- ============================================
--- STORED PROCEDURE 3 (bonus): Top Selling Products
--- Used for the dashboard "Top 5 selling products"
--- ============================================
+
 
 CREATE PROCEDURE sp_GetTopSellingProducts
     @TopN INT = 5
@@ -150,9 +139,7 @@ BEGIN
 END
 GO
 
--- ============================================
--- SAMPLE DATA (for testing/screenshots)
--- ============================================
+
 
 INSERT INTO Products (ProductName, SKU, UnitPrice, StockQuantity, ReorderThreshold)
 VALUES
@@ -167,7 +154,7 @@ VALUES
 ('Ahmed Al Mansouri', 'ahmed@example.com', '0501234567'),
 ('Fatima Noor', 'fatima@example.com', '0559876543');
 
--- Test the procedures
+
 EXEC sp_CreateOrder @CustomerID = 1, @ProductID = 1, @Quantity = 5;
 EXEC sp_GetLowStockItems;
 EXEC sp_GetTopSellingProducts @TopN = 5;
